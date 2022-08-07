@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "330758794136",
+    "project_id": "barbotz-37910",
+    "storage_bucket": "barbotz-37910.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330758794136:android:e44538e6b6f3ada13b99ed",
+        "android_client_info": {
+          "package_name": "de.barbotz.barbotzapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330758794136-9kfr9al5fk6q498tj2qpamamg2gha61i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6qEz54Y7TX3cm-Pb6E2BwMERjHAyfq9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330758794136-9kfr9al5fk6q498tj2qpamamg2gha61i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "330758794136-aajgglpu6e426en45l9s33tqhghiackv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.barbotz.barbotzapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
