@@ -81,7 +81,7 @@ class MenuPage extends StatelessWidget {
                           fontWeight: FontWeight.w100))),
             ),
 
-            const SizedBox(height: 220)
+            const SizedBox(height: 80)
           ],
         ),
       )),

@@ -5,9 +5,15 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:barbotzapp/screens/login_page.dart';
 import 'screens/change_bottles.dart';
 import 'firebase_options.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.black87, // navigation bar color
+    statusBarColor: Colors.transparent, // status bar color
+  ));
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
