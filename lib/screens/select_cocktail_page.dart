@@ -12,50 +12,73 @@ class SelectCocktailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.brown[500],
-        appBar: AppBar(
-          toolbarHeight: 75,
-          elevation: 0,
-          backgroundColor: Colors.brown[700],
-          title: RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-                text: "BARBOT.Z",
-                style: GoogleFonts.bigShouldersStencilText(
-                  color: Colors.brown[900],
-                  fontSize: 45,
-                  fontWeight: FontWeight.w900,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                    text: '\nPERFECT MIXED COCKTAILS',
-                    style: GoogleFonts.montserrat(
-                        color: Colors.brown[200],
-                        fontSize: 14,
-                        fontWeight: FontWeight.w300),
-                  ),
-                ]),
-          ),
-          actions: [
-            GestureDetector(
-              onTap: (() {
-                FirebaseAuth.instance.signOut();
-              }),
-              child: Padding(
-                padding: EdgeInsets.only(right: 12.0),
-                child: Icon(
-                  Icons.logout,
-                  size: 30,
-                  color: Colors.deepOrange[100],
-                ),
-              ),
-            )
-          ],
-        ),
+        // appBar: AppBar(
+        //   toolbarHeight: 75,
+        //   elevation: 0,
+        //   backgroundColor: Colors.brown[700],
+        //   title: RichText(
+        //     textAlign: TextAlign.end,
+        //     text: TextSpan(
+        //         text: "BARBOT.Z",
+        //         style: GoogleFonts.bigShouldersStencilText(
+        //           color: Colors.brown[900],
+        //           fontSize: 45,
+        //           fontWeight: FontWeight.w900,
+        //         ),
+        //         children: <TextSpan>[
+        //           TextSpan(
+        //             text: '\nPERFECT MIXED COCKTAILS',
+        //             style: GoogleFonts.montserrat(
+        //                 color: Colors.brown[200],
+        //                 fontSize: 14,
+        //                 fontWeight: FontWeight.w300),
+        //           ),
+        //         ]),
+        //   ),
+        //   actions: [
+        //     GestureDetector(
+        //       onTap: (() {
+        //         FirebaseAuth.instance.signOut();
+        //       }),
+        //       child: Padding(
+        //         padding: EdgeInsets.only(right: 12.0),
+        //         child: Icon(
+        //           Icons.logout,
+        //           size: 30,
+        //           color: Colors.deepOrange[100],
+        //         ),
+        //       ),
+        //     )
+        //   ],
+        // ),
         body: Column(
           children: [
-            //const SizedBox(height: 25),
+            const SizedBox(height: 50),
+            // BARBOTZ
+            Container(
+              height: 59,
+              child: Text(
+                'BARBOTZ',
+                style: GoogleFonts.bigShouldersStencilText(
+                    color: Colors.brown[900],
+                    fontSize: 60,
+                    fontWeight: FontWeight.w900),
+              ),
+            ),
+
+            Text(
+              'PERFECT MIXED COCKTAILS',
+              style: GoogleFonts.montserrat(
+                  color: Colors.brown[200],
+                  fontSize: 14,
+                  fontWeight: FontWeight.w300),
+            ),
+
+            const SizedBox(height: 10),
+
             Expanded(
               child: ListView.builder(
+                  shrinkWrap: false,
                   itemCount: Cocktails.length,
                   itemBuilder: (context, index) {
                     return CocktailCard(cocktail: Cocktails[index]);

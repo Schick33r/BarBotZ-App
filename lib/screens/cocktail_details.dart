@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CocktailDetailsPage extends StatefulWidget {
-  final String cocktailname;
-  final String ingredient1;
-  final String ingredient2;
-  final String? ingredient3;
-  final String? ingredient4;
+import '../models/cocktail.dart';
 
-  const CocktailDetailsPage(
-      {Key? key,
-      required this.cocktailname,
-      required this.ingredient1,
-      required this.ingredient2,
-      this.ingredient3 = '',
-      this.ingredient4 = ''})
+class CocktailDetailsPage extends StatefulWidget {
+  final Cocktail cocktail;
+
+  const CocktailDetailsPage({Key? key, required this.cocktail})
       : super(key: key);
 
   @override
@@ -42,7 +34,7 @@ class _CocktailDetailsPageState extends State<CocktailDetailsPage> {
                   Align(
                     alignment: Alignment.center,
                     child: Text(
-                      widget.cocktailname,
+                      widget.cocktail.cocktailName,
                       style: GoogleFonts.bigShouldersStencilText(
                           fontSize: 43,
                           fontWeight: FontWeight.w600,
@@ -71,7 +63,7 @@ class _CocktailDetailsPageState extends State<CocktailDetailsPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Cranberryjuice',
+                          widget.cocktail.ingredients[0].toString(),
                           style: GoogleFonts.montserrat(
                               fontSize: 24,
                               fontWeight: FontWeight.w600,
@@ -93,7 +85,7 @@ class _CocktailDetailsPageState extends State<CocktailDetailsPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Vodka',
+                          widget.cocktail.ingredients[1].toString(),
                           style: GoogleFonts.montserrat(
                               fontSize: 24,
                               fontWeight: FontWeight.w600,

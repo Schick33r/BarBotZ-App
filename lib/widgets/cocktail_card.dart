@@ -11,7 +11,7 @@ class CocktailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 25),
       child: Container(
         height: 640,
         // color: Colors.red,

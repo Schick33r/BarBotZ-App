@@ -1,5 +1,7 @@
 import 'package:barbotzapp/auth/main_page.dart';
 import 'package:barbotzapp/screens/cocktail_details.dart';
+import 'package:barbotzapp/screens/menu_page.dart';
+import 'package:barbotzapp/screens/select_cocktail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:barbotzapp/screens/login_page.dart';
@@ -27,9 +29,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      initialRoute: '/',
+      routes: {
+        // initRoute -> MainPage()
+        '/': (context) => MainPage(),
+
+        // MENU
+        '/MenuPage': (context) => MenuPage(),
+
+        '/Cocktails': (context) => SelectCocktailPage(),
+
+        //'/CreateCocktail':(context) => CreateNewCocktail();
+
+        '/ChangeBottles': (context) => ChangeBottles()
+      },
+      //home: MainPage(),
     );
   }
 }
