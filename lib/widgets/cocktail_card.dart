@@ -1,3 +1,4 @@
+import 'package:barbotzapp/screens/cocktail_details.dart';
 import 'package:flutter/material.dart';
 import 'package:barbotzapp/models/globals.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -53,12 +54,12 @@ class CocktailCard extends StatelessWidget {
                       child: ElevatedButton(
                         child: Text('See Details', style: CC_ButtonTextStyle),
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) =>
-                          //           const SexOnTheBeach()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) =>
+                                    CocktailDetailsPage(cocktail: cocktail)),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           primary: CC_ButtonBackground,

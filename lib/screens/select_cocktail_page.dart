@@ -53,16 +53,26 @@ class SelectCocktailPage extends StatelessWidget {
         // ),
         body: Column(
           children: [
-            const SizedBox(height: 50),
-            // BARBOTZ
+            const SizedBox(height: 47),
+
             Container(
-              height: 59,
-              child: Text(
-                'BARBOTZ',
-                style: GoogleFonts.bigShouldersStencilText(
-                    color: Colors.brown[900],
-                    fontSize: 60,
-                    fontWeight: FontWeight.w900),
+                height: 3,
+                width: MediaQuery.of(context).size.width / 1.365, //2.02,
+                color: Colors.brown[900]),
+            // BARBOTZ
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: SizedBox(
+                height: 59,
+                child: Text(
+                  'BARBOTZ',
+                  style: GoogleFonts.bigShouldersStencilText(
+                      color: Colors.brown[900],
+                      fontSize: 60,
+                      fontWeight: FontWeight.w900),
+                ),
               ),
             ),
 
@@ -71,8 +81,15 @@ class SelectCocktailPage extends StatelessWidget {
               style: GoogleFonts.montserrat(
                   color: Colors.brown[200],
                   fontSize: 14,
-                  fontWeight: FontWeight.w300),
+                  fontWeight: FontWeight.w400),
             ),
+
+            const SizedBox(height: 5),
+
+            Container(
+                height: 3,
+                width: MediaQuery.of(context).size.width / 1.365, //2.02,
+                color: Colors.brown[900]),
 
             const SizedBox(height: 10),
 

@@ -15,12 +15,12 @@ class MenuPage extends StatelessWidget {
             const SizedBox(height: 70),
             // BARBOTZ
             Container(
-              height: 59,
+              height: 65,
               child: Text(
                 'BARBOTZ',
                 style: GoogleFonts.bigShouldersStencilText(
                     color: Colors.brown[900],
-                    fontSize: 60,
+                    fontSize: 65,
                     fontWeight: FontWeight.w900),
               ),
             ),
@@ -29,8 +29,8 @@ class MenuPage extends StatelessWidget {
               'PERFECT MIXED COCKTAILS',
               style: GoogleFonts.montserrat(
                   color: Colors.brown[200],
-                  fontSize: 14,
-                  fontWeight: FontWeight.w300),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400),
             ),
 
             const SizedBox(height: 120),
