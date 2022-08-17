@@ -1,10 +1,12 @@
 import 'dart:ui';
-
+import 'package:barbotzapp/example/cocktails.dart';
+import 'package:barbotzapp/models/cocktail.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
 class ChangeBottles extends StatefulWidget {
-  const ChangeBottles({Key? key}) : super(key: key);
+  final List<Cocktail> cocktails;
+  const ChangeBottles({Key? key, required this.cocktails}) : super(key: key);
 
   @override
   State<ChangeBottles> createState() => _ChangeBottlesState();
@@ -28,13 +30,14 @@ class _ChangeBottlesState extends State<ChangeBottles> {
         title: const Text("Change your Bottles"),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
-            child: Icon(
-              Icons.save_outlined,
-              size: 28,
-              color: Colors.deepOrange[200],
-            ),
-          )
+              padding: const EdgeInsets.only(right: 12.0),
+              child: IconButton(
+                  onPressed: () {
+                    setAvailableCocktails(widget.cocktails);
+                  },
+                  icon: Icon(
+                    Icons.save,
+                  )))
         ],
       ),
       body: Padding(
@@ -108,5 +111,46 @@ class _ChangeBottlesState extends State<ChangeBottles> {
 
   void itemSelectionChanged(String? d) {
     print(d);
+  }
+
+  void setAvailableCocktails(cocktail) {
+    print(cocktail.length);
+    // List cocktails = cocktail;
+    // cocktails.forEach((element) {
+    //   print(cocktail.ingrdients.name);
+    // });
+
+    for (var element in cocktail) {
+      // var details = {'Usrname': 'tom', 'Password': 'pass@123'};
+      // print(details.values);
+      // List newListe = details.values.toList();
+
+      // List newList = element.ings;
+      // List onlyVal = newList.keys.toList()
+      // print(newListw);
+
+      print(element.name);
+      //print(element.ings);
+
+      List<Map> Ings = element.ings;
+      print(Ings);
+      print(Ings.length);
+
+      print(element.ings);
+      // var combinedMap = {for (var map in Ings) ...map};
+      // print(combinedMap);
+      // print(combinedMap.length);
+
+      // var w = Ings.reduce((a, b) {
+      //   a.addAll(b);
+      //   return a;
+      // });
+
+      for (var item in Ings) {
+        print(item.values);
+      }
+
+      // print(w.runtimeType);
+    }
   }
 }

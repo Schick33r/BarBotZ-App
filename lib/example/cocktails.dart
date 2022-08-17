@@ -13,13 +13,35 @@ List<Cocktail> Cocktails = [
         'amount': 100,
       },
       {
-        'name': 'in3 ',
+        'name': 'Orangejuice ',
         'amount': 100,
       },
       {
-        'name': ' ',
+        'name': 'Whiskey ',
         'amount': 100,
-      }
+      },
+    ],
+  ),
+  Cocktail(
+    cocktailName: 'Screw Driver',
+    imageUrl: 'assets/screw_driver.png',
+    ingredients: [
+      {
+        'name': 'Vodka',
+        'amount': 40,
+      },
+      {
+        'name': 'Orangejuice',
+        'amount': 100,
+      },
+      {
+        'name': 'Cranberry ',
+        'amount': 100,
+      },
+      {
+        'name': 'Rum ',
+        'amount': 100,
+      },
     ],
   )
 ];

@@ -46,6 +46,7 @@ class _CocktailDetailsPageState extends State<CocktailDetailsPage> {
   @override
   Widget build(BuildContext context) {
     print(widget.cocktail.ingredients.length);
+    int ingLength = widget.cocktail.ingredients.length;
 
     return Scaffold(
         appBar: AppBar(
@@ -72,6 +73,7 @@ class _CocktailDetailsPageState extends State<CocktailDetailsPage> {
                   ),
                 ]),
           ),
+          centerTitle: true,
           iconTheme: const IconThemeData(color: Color(0xffac8a75)),
         ),
         body: Container(
@@ -99,105 +101,32 @@ class _CocktailDetailsPageState extends State<CocktailDetailsPage> {
               // Ingredients Background
               Positioned(
                 bottom: 0.0,
-                height: 350.0,
+                height: 320.0,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
-                    decoration: BoxDecoration(
-                        color: const Color(0xFFac8a75),
-                        borderRadius: BorderRadius.circular(25))),
+                    decoration: const BoxDecoration(
+                        color: Color(0xFFac8a75),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25),
+                            topRight: Radius.circular(25)))),
               ),
-              Positioned(
-                top: 535,
-                width: 300,
-                left: MediaQuery.of(context).size.width / 2 - 150,
-                child: Column(
-                  children: [
-                    // Ingredient 1:
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          widget.cocktail.ingredients[0]['name'],
-                          style: GoogleFonts.montserrat(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xFF3c3029)),
-                        ),
-                        Text(
-                          (widget.cocktail.ingredients[0]['amount'] / 10)
-                                  .toStringAsFixed(0) +
-                              " cl",
-                          style: GoogleFonts.montserrat(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFF3c3029)),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
 
-                    // Ingredient 2:
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          widget.cocktail.ingredients[1]['name'],
-                          style: GoogleFonts.montserrat(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xFF3c3029)),
-                        ),
-                        Text(
-                          (widget.cocktail.ingredients[1]['amount'] / 10)
-                                  .toStringAsFixed(0) +
-                              " cl",
-                          style: GoogleFonts.montserrat(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFF3c3029)),
-                        ),
-                      ],
-                    ),
+              // INGREDIENTS WIDGET
+              showIngredients(widget.cocktail, context, ingLength),
 
-                    const SizedBox(height: 20),
-                    // Ingredient 3:
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          widget.cocktail.ingredients[1]['name'],
-                          style: GoogleFonts.montserrat(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xFF3c3029)),
-                        ),
-                        Text(
-                          (widget.cocktail.ingredients[2]['amount'] / 10)
-                                  .toStringAsFixed(0) +
-                              " cl",
-                          style: GoogleFonts.montserrat(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFF3c3029)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
               // Cocktail Picture
               Positioned(
                 height: 500,
                 width: 290,
-                top: 40,
+                top: 0,
                 left: -35,
-                child: Image.asset('assets/sex_on_the_beach.png'),
+                child: Image.asset(widget.cocktail.imageUrl),
               ),
               Positioned(
                   height: 50,
                   width: 165,
                   right: 30,
-                  bottom: 330,
+                  bottom: 300,
                   child: Container(
                     child: ElevatedButton(
                         onPressed: orderButton
@@ -291,5 +220,248 @@ class _CocktailDetailsPageState extends State<CocktailDetailsPage> {
             ],
           ),
         ));
+  }
+}
+
+showIngredients(cocktail, context, ingLength) {
+  // assert(cocktail != null);
+
+  // --- 4 INGREDIENTS :
+  if (ingLength == 4) {
+    return Positioned(
+      top: 490,
+      width: 300,
+      left: MediaQuery.of(context).size.width / 2 - 150,
+      child: Column(
+        children: [
+          // Ingredient 1:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cocktail.ingredients[0]['name'],
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF3c3029)),
+              ),
+              Text(
+                (cocktail.ingredients[0]['amount'] / 10).toStringAsFixed(0) +
+                    " cl",
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF3c3029)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          // Ingredient 2:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cocktail.ingredients[1]['name'],
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF3c3029)),
+              ),
+              Text(
+                (cocktail.ingredients[1]['amount'] / 10).toStringAsFixed(0) +
+                    " cl",
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF3c3029)),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+          // Ingredient 3:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cocktail.ingredients[2]['name'],
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF3c3029)),
+              ),
+              Text(
+                (cocktail.ingredients[2]['amount'] / 10).toStringAsFixed(0) +
+                    " cl",
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF3c3029)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          // Ingredient 4:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cocktail.ingredients[3]['name'],
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF3c3029)),
+              ),
+              Text(
+                (cocktail.ingredients[3]['amount'] / 10).toStringAsFixed(0) +
+                    " cl",
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF3c3029)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // --- 3 INGREDIENTS :
+  if (ingLength == 3) {
+    return Positioned(
+      top: 490,
+      width: 300,
+      left: MediaQuery.of(context).size.width / 2 - 150,
+      child: Column(
+        children: [
+          // Ingredient 1:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cocktail.ingredients[0]['name'],
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF3c3029)),
+              ),
+              Text(
+                (cocktail.ingredients[0]['amount'] / 10).toStringAsFixed(0) +
+                    " cl",
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF3c3029)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          // Ingredient 2:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cocktail.ingredients[1]['name'],
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF3c3029)),
+              ),
+              Text(
+                (cocktail.ingredients[1]['amount'] / 10).toStringAsFixed(0) +
+                    " cl",
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF3c3029)),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+          // Ingredient 3:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cocktail.ingredients[2]['name'],
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF3c3029)),
+              ),
+              Text(
+                (cocktail.ingredients[2]['amount'] / 10).toStringAsFixed(0) +
+                    " cl",
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF3c3029)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  // --- 2 INGREDIENTS :
+  if (ingLength == 2) {
+    return Positioned(
+      top: 490,
+      width: 300,
+      left: MediaQuery.of(context).size.width / 2 - 150,
+      child: Column(
+        children: [
+          // Ingredient 1:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cocktail.ingredients[0]['name'],
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF3c3029)),
+              ),
+              Text(
+                (cocktail.ingredients[0]['amount'] / 10).toStringAsFixed(0) +
+                    " cl",
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF3c3029)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          // Ingredient 2:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cocktail.ingredients[1]['name'],
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF3c3029)),
+              ),
+              Text(
+                (cocktail.ingredients[1]['amount'] / 10).toStringAsFixed(0) +
+                    " cl",
+                style: GoogleFonts.montserrat(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xFF3c3029)),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

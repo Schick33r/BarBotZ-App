@@ -62,7 +62,7 @@ class MenuPage extends StatelessWidget {
 
             GestureDetector(
               onTap: () {
-                // Navigator.pushNamed(context, '/CreateCocktail');
+                Navigator.pushNamed(context, '/CreateCocktail');
               },
               child: Container(
                 height: MediaQuery.of(context).size.height / 7,
@@ -81,7 +81,7 @@ class MenuPage extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            // CREATE NEW COCKTAIL BUTTON
+            // CHANGE BOTTLES BUTTON
 
             GestureDetector(
               onTap: () {
