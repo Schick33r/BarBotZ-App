@@ -93,14 +93,14 @@ class SelectCocktailPage extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            Expanded(
-              child: ListView.builder(
-                  shrinkWrap: false,
-                  itemCount: Cocktails.length,
-                  itemBuilder: (context, index) {
-                    return CocktailCard(cocktail: Cocktails[index]);
-                  }),
-            )
+            // Expanded(
+            //   child: ListView.builder(
+            //       shrinkWrap: false,
+            //       itemCount: Cocktails.length,
+            //       itemBuilder: (context, index) {
+            //         return CocktailCard(cocktail: Cocktails[index]);
+            //       }),
+            // )
           ],
         ));
   }

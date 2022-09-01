@@ -1,3 +1,4 @@
+import 'package:barbotzapp/models/cocktail_model.dart';
 import 'package:barbotzapp/screens/cocktail_details.dart';
 import 'package:flutter/material.dart';
 import 'package:barbotzapp/models/globals.dart';
@@ -6,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../models/cocktail.dart';
 
 class CocktailCard extends StatelessWidget {
-  final Cocktail cocktail;
+  final CocktailMod cocktail;
   const CocktailCard({Key? key, required this.cocktail}) : super(key: key);
 
   @override

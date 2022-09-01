@@ -38,6 +38,8 @@ dependencies:
   google_fonts:
   cloud_firestore: ^3.1.18
   dropdown_search: ^3.0.1
+  textfield_search: ^0.10.0
+  flutter_dropdown_search: ^0.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,11 @@
 import 'dart:ui';
 import 'package:barbotzapp/example/cocktails.dart';
 import 'package:barbotzapp/models/cocktail.dart';
+import 'package:barbotzapp/models/cocktail_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dropdown_search/flutter_dropdown_search.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChangeBottles extends StatefulWidget {
   final List<Cocktail> cocktails;
@@ -13,12 +16,31 @@ class ChangeBottles extends StatefulWidget {
 }
 
 class _ChangeBottlesState extends State<ChangeBottles> {
+  List<String> currentIngredients = [];
+  List<CocktailMod> CocktailDatabaseList = [];
   List<String> ingredients = [
     "Vodka",
     "Peachliqeur",
     "Orangejuice",
     "Cranberryjuice"
   ];
+
+  List<TextEditingController>? _controllers = [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    getPositions(_controllers);
+  }
+
+  @override
+  void dispose() {
+    for (TextEditingController c in _controllers!) {
+      c.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +55,14 @@ class _ChangeBottlesState extends State<ChangeBottles> {
               padding: const EdgeInsets.only(right: 12.0),
               child: IconButton(
                   onPressed: () {
-                    setAvailableCocktails(widget.cocktails);
+                    updatePositions(_controllers);
+                    getIngredientsFromPositons(currentIngredients);
+                    deleteDocsFromCollection();
+                    getCocktailsFromCocktailsDatabase();
+                    checkAndAddAvailableCocktails(CocktailDatabaseList);
+                    //setPositions(_controllers);
+                    //printControllers();
+                    //setAvailableCocktails(widget.cocktails);
                   },
                   icon: Icon(
                     Icons.save,
@@ -45,53 +74,22 @@ class _ChangeBottlesState extends State<ChangeBottles> {
         child: ListView.builder(
           itemCount: 10,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 20),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[500],
-                    borderRadius: BorderRadius.circular(12),
+            _controllers!.add(new TextEditingController());
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Position ' + [index + 1].toString() + ':'),
+                  FlutterDropdownSearch(
+                    textController: _controllers?[index],
+                    items: ingredients,
+                    dropdownHeight: (ingredients.length * 40),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      DropdownSearch<String>(
-                        mode: Mode.MENU,
-                        showSelectedItems: true,
-                        items: ingredients,
-                        dropdownSearchDecoration: InputDecoration(
-                          labelText: "Position. " + ((index + 1).toString()),
-                          labelStyle: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600),
-                          hintText: "Select an ingredient",
-                        ),
-                        //popupItemDisabled: isItemDisabled,
-                        onChanged: itemSelectionChanged,
-                        //selectedItem: "",
-                        showSearchBox: true,
-                        searchFieldProps: TextFieldProps(
-                          cursorColor: Colors.deepOrange[100],
-                          decoration: InputDecoration(
-                            hintText: "Search Ingredients",
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.brown.shade400),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.deepOrange.shade200),
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 15)
-              ],
+                  SizedBox(height: 12)
+                ],
+              ),
             );
           },
         ),
@@ -99,58 +97,106 @@ class _ChangeBottlesState extends State<ChangeBottles> {
     );
   }
 
-  // bool isItemDisabled(String s) {
-  //   //return s.startsWith('I');
+  // Send Positions to Firebase
 
-  //   if (s.startsWith('I')) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  void printControllers() {
+    print(_controllers?.length);
+    print(_controllers![1].text);
+  }
 
   void itemSelectionChanged(String? d) {
     print(d);
   }
 
-  void setAvailableCocktails(cocktail) {
-    print(cocktail.length);
-    // List cocktails = cocktail;
-    // cocktails.forEach((element) {
-    //   print(cocktail.ingrdients.name);
-    // });
+  Future setPositions(_controllers) async {
+    await FirebaseFirestore.instance.collection('positions').add({
+      'Position 1': _controllers[0].text,
+    });
+    print('Positions updated');
+  }
 
-    for (var element in cocktail) {
-      // var details = {'Usrname': 'tom', 'Password': 'pass@123'};
-      // print(details.values);
-      // List newListe = details.values.toList();
+// collection reference
+  final CollectionReference positionCollection =
+      FirebaseFirestore.instance.collection('positions');
 
-      // List newList = element.ings;
-      // List onlyVal = newList.keys.toList()
-      // print(newListw);
+  Future updatePositions(_controllers) async {
+    await positionCollection.doc('5FxrbaLGdzB6YUjhkpe8').set({
+      'Position 1': _controllers[0].text,
+      'Position 2': _controllers[1].text,
+      'Position 3': _controllers[2].text,
+      'Position 4': _controllers[3].text,
+      'Position 5': _controllers[4].text,
+      'Position 6': _controllers[5].text,
+      'Position 7': _controllers[6].text,
+      'Position 8': _controllers[7].text,
+      'Position 9': _controllers[8].text,
+      'Position 10': _controllers[9].text,
+    });
+    print('Positions Added');
+  }
 
-      print(element.name);
-      //print(element.ings);
+  Future getPositions(_controllers) async {
+    var data = await positionCollection.doc('5FxrbaLGdzB6YUjhkpe8').get();
 
-      List<Map> Ings = element.ings;
-      print(Ings);
-      print(Ings.length);
+    _controllers[0].text = data.get('Position 1');
+    _controllers[1].text = data.get('Position 2');
+    _controllers[2].text = data.get('Position 3');
+    _controllers[3].text = data.get('Position 4');
+    _controllers[4].text = data.get('Position 5');
+    _controllers[5].text = data.get('Position 6');
+    _controllers[6].text = data.get('Position 7');
+    _controllers[7].text = data.get('Position 8');
+    _controllers[8].text = data.get('Position 9');
+    _controllers[9].text = data.get('Position 10');
+  }
 
-      print(element.ings);
-      // var combinedMap = {for (var map in Ings) ...map};
-      // print(combinedMap);
-      // print(combinedMap.length);
+  Future getIngredientsFromPositons(currrentIngredients) async {
+    // collection reference
+    final CollectionReference positionCollection =
+        FirebaseFirestore.instance.collection('positions');
 
-      // var w = Ings.reduce((a, b) {
-      //   a.addAll(b);
-      //   return a;
-      // });
+    var data = await positionCollection.doc('5FxrbaLGdzB6YUjhkpe8').get();
 
-      for (var item in Ings) {
-        print(item.values);
+    currentIngredients.clear();
+    currentIngredients.add(data.get('Position 1'));
+    currentIngredients.add(data.get('Position 2'));
+    currentIngredients.add(data.get('Position 3'));
+    currentIngredients.add(data.get('Position 4'));
+    currentIngredients.add(data.get('Position 5'));
+    currentIngredients.add(data.get('Position 6'));
+    currentIngredients.add(data.get('Position 7'));
+    currentIngredients.add(data.get('Position 8'));
+    currentIngredients.add(data.get('Position 9'));
+    currentIngredients.add(data.get('Position 10'));
+
+    print(currrentIngredients);
+  }
+
+  Future deleteDocsFromCollection() async {
+    var collection = FirebaseFirestore.instance.collection('cocktails');
+    var snapshot = await collection.get();
+    for (var doc in snapshot.docs) {
+      await doc.reference.delete();
+      print('all docs in collection cocktails deleted');
+    }
+  }
+
+  Future getCocktailsFromCocktailsDatabase() async {
+    var data =
+        await FirebaseFirestore.instance.collection('all cocktails').get();
+
+    setState(() {
+      CocktailDatabaseList =
+          List.from(data.docs.map((doc) => CocktailMod.fromSnapshot(doc)));
+    });
+    print(CocktailDatabaseList);
+  }
+
+  Future checkAndAddAvailableCocktails(CocktailDatabaseList) async {
+    for (var doc in CocktailDatabaseList) {
+      if (doc.name == 'Screw Driver') {
+        print('Screw Drriver find.');
       }
-
-      // print(w.runtimeType);
     }
   }
 }

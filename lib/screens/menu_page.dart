@@ -33,13 +33,13 @@ class MenuPage extends StatelessWidget {
                   fontWeight: FontWeight.w400),
             ),
 
-            const SizedBox(height: 120),
+            const SizedBox(height: 80),
 
             // AVAILABLE COCKTAILS BUTTON
 
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/Cocktails');
+                Navigator.pushNamed(context, '/AvailableCocktails');
               },
               child: Container(
                 height: MediaQuery.of(context).size.height / 7,
@@ -81,7 +81,30 @@ class MenuPage extends StatelessWidget {
 
             const SizedBox(height: 25),
 
-            // CHANGE BOTTLES BUTTON
+            // COCKTAIL DATABASE BUTTON
+
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/CocktailDatabase');
+              },
+              child: Container(
+                height: MediaQuery.of(context).size.height / 7,
+                width: MediaQuery.of(context).size.width / 1.3,
+                decoration: BoxDecoration(
+                    color: Colors.brown[900],
+                    borderRadius: BorderRadius.circular(8)),
+                child: Center(
+                    child: Text('Cocktail Database',
+                        style: GoogleFonts.bebasNeue(
+                            color: Colors.deepOrange[200],
+                            fontSize: 28,
+                            fontWeight: FontWeight.w100))),
+              ),
+            ),
+
+            const SizedBox(height: 25),
+
+            // CHANGE BOTTLES Button
 
             GestureDetector(
               onTap: () {
@@ -91,12 +114,12 @@ class MenuPage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 7,
                 width: MediaQuery.of(context).size.width / 1.3,
                 decoration: BoxDecoration(
-                    color: Colors.brown[900],
+                    color: Color.fromARGB(187, 62, 39, 35),
                     borderRadius: BorderRadius.circular(8)),
                 child: Center(
                     child: Text('Change Bottles',
                         style: GoogleFonts.bebasNeue(
-                            color: Colors.deepOrange[200],
+                            color: Color.fromARGB(253, 244, 157, 157),
                             fontSize: 28,
                             fontWeight: FontWeight.w100))),
               ),

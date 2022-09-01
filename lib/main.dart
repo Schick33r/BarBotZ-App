@@ -1,5 +1,7 @@
 import 'package:barbotzapp/auth/main_page.dart';
 import 'package:barbotzapp/models/cocktail.dart';
+import 'package:barbotzapp/screens/available_cocktails.dart';
+import 'package:barbotzapp/screens/cocktail_database.dart';
 import 'package:barbotzapp/screens/cocktail_details.dart';
 import 'package:barbotzapp/screens/create_new_cocktail.dart';
 import 'package:barbotzapp/screens/menu_page.dart';
@@ -43,9 +45,11 @@ class MyApp extends StatelessWidget {
         // MENU
         '/MenuPage': (context) => MenuPage(),
 
-        '/Cocktails': (context) => SelectCocktailPage(),
+        '/AvailableCocktails': (context) => AvailableCocktails(),
 
         '/CreateCocktail': (context) => CreateNewCocktail(),
+
+        '/CocktailDatabase': (context) => CocktailDatabase(),
 
         '/ChangeBottles': (context) => ChangeBottles(cocktails: Cocktails)
       },

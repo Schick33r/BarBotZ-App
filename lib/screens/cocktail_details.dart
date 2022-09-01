@@ -1,3 +1,4 @@
+import 'package:barbotzapp/models/cocktail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
@@ -6,7 +7,7 @@ import '../models/cocktail.dart';
 import '../models/globals.dart';
 
 class CocktailDetailsPage extends StatefulWidget {
-  final Cocktail cocktail;
+  final CocktailMod cocktail;
 
   const CocktailDetailsPage({Key? key, required this.cocktail})
       : super(key: key);
